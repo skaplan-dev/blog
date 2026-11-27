@@ -1,0 +1,16 @@
+---
+import Page from '../layouts/Page.astro';
+import { contact } from '../lib/resume';
+---
+
+<Page title="Contact" page="contact" note={contact.location}>
+  <div class="box">
+<table>
+    <tbody>
+      <tr><th style="width:150px">Email</th><td><a href={`mailto:${contact.email}`}>{contact.email}</a></td></tr>
+      <tr><th>GitHub</th><td><a href={contact.github.href}>{contact.github.label}</a></td></tr>
+      <tr><th>LinkedIn</th><td><a href={contact.linkedin.href}>{contact.linkedin.label}</a></td></tr>
+    </tbody>
+  </table>
+</div>
+</Page>

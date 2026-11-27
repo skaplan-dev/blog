@@ -1,0 +1,602 @@
+{
+ "scheduleDate": "2026-11-24",
+ "stopSummary": {
+  "season": "Fall 2025",
+  "stopsCounted": 6652,
+  "stopsAtZero": 145,
+  "stopsUnderOne": 686
+ },
+ "loneliestStops": [
+  {
+   "id": "4347",
+   "name": "Brook Rd @ Windsor Rd",
+   "town": "Milton",
+   "lat": 42.260741,
+   "lon": -71.086209,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 10,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "3483",
+   "name": "321 Adams St",
+   "town": "Milton",
+   "lat": 42.260966,
+   "lon": -71.056979,
+   "routes": [
+    "217"
+   ],
+   "busesPerDay": 4,
+   "yearsAtZero": 10,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "3471",
+   "name": "224 Adams St opp Churchills Ln",
+   "town": "Milton",
+   "lat": 42.264556,
+   "lon": -71.063972,
+   "routes": [
+    "217"
+   ],
+   "busesPerDay": 4,
+   "yearsAtZero": 10,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "3472",
+   "name": "Opp 201 Adams St",
+   "town": "Milton",
+   "lat": 42.265613,
+   "lon": -71.065283,
+   "routes": [
+    "217"
+   ],
+   "busesPerDay": 4,
+   "yearsAtZero": 10,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4375",
+   "name": "Edge Hill Rd @ Cedar Rd",
+   "town": "Milton",
+   "lat": 42.25541,
+   "lon": -71.048344,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0.1,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "8485",
+   "name": "Wiswall Rd @ Dedham St",
+   "town": "Newton",
+   "lat": 42.298026,
+   "lon": -71.184913,
+   "routes": [
+    "52"
+   ],
+   "busesPerDay": 15,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 2,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "39676",
+   "name": "Commercial St @ John Paul Circle",
+   "town": "Braintree",
+   "lat": 42.231915,
+   "lon": -70.993987,
+   "routes": [
+    "236"
+   ],
+   "busesPerDay": 15,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 1.2,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7184",
+   "name": "Cabot St @ Roosevelt Ave",
+   "town": "Beverly",
+   "lat": 42.566748,
+   "lon": -70.887326,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7186",
+   "name": "545 Cabot St",
+   "town": "Beverly",
+   "lat": 42.568433,
+   "lon": -70.889273,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7193",
+   "name": "Dodge St opp Raymond Ave",
+   "town": "Beverly",
+   "lat": 42.5791,
+   "lon": -70.887558,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7104",
+   "name": "Dodge St @ King Terr",
+   "town": "Beverly",
+   "lat": 42.578556,
+   "lon": -70.88847,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7113",
+   "name": "Cabot St @ Columbia Rd",
+   "town": "Beverly",
+   "lat": 42.567638,
+   "lon": -70.888542,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7114",
+   "name": "Cabot St @ Bradford Rd",
+   "town": "Beverly",
+   "lat": 42.566758,
+   "lon": -70.8875,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 9,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "14331",
+   "name": "Edge Hill Rd @ Hollis St",
+   "town": "Milton",
+   "lat": 42.257131,
+   "lon": -71.043633,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 8,
+   "seasons": {
+    "Fall 2016": 0.1,
+    "Fall 2017": 0.1,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7187",
+   "name": "Cabot St @ Lexington Dr",
+   "town": "Beverly",
+   "lat": 42.569474,
+   "lon": -70.890493,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 8,
+   "seasons": {
+    "Fall 2016": 0.2,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7103",
+   "name": "Dodge St @ Raymond Ave",
+   "town": "Beverly",
+   "lat": 42.579107,
+   "lon": -70.887711,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 8,
+   "seasons": {
+    "Fall 2016": 0.2,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "7111",
+   "name": "Cabot St opp Lexington Dr",
+   "town": "Beverly",
+   "lat": 42.56908,
+   "lon": -70.890188,
+   "routes": [
+    "451"
+   ],
+   "busesPerDay": 3,
+   "yearsAtZero": 8,
+   "seasons": {
+    "Fall 2016": 1.6,
+    "Fall 2017": 0,
+    "Fall 2018": 0,
+    "Fall 2019": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "3470",
+   "name": "Adams St @ Forbes Rd",
+   "town": "Milton",
+   "lat": 42.262584,
+   "lon": -71.061308,
+   "routes": [
+    "217"
+   ],
+   "busesPerDay": 4,
+   "yearsAtZero": 7,
+   "seasons": {
+    "Fall 2016": 0.6,
+    "Fall 2017": 0,
+    "Fall 2018": 0.5,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "8154",
+   "name": "Lincoln St @ Bowdoin St",
+   "town": "Newton",
+   "lat": 42.321005,
+   "lon": -71.210712,
+   "routes": [
+    "59"
+   ],
+   "busesPerDay": 2,
+   "yearsAtZero": 7,
+   "seasons": {
+    "Fall 2016": 0.7,
+    "Fall 2017": 1.2,
+    "Fall 2018": 3.2,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "33635",
+   "name": "W Squantum St @ London Ave",
+   "town": "Quincy",
+   "lat": 42.268555,
+   "lon": -71.040388,
+   "routes": [
+    "215"
+   ],
+   "busesPerDay": 1,
+   "yearsAtZero": 7,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0.5,
+    "Fall 2019": 0,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4308",
+   "name": "Randolph Ave @ Nahanton Ave",
+   "town": "Milton",
+   "lat": 42.234377,
+   "lon": -71.069839,
+   "routes": [
+    "240"
+   ],
+   "busesPerDay": 42,
+   "yearsAtZero": 6,
+   "seasons": {
+    "Fall 2016": 1.4,
+    "Fall 2017": 0.6,
+    "Fall 2018": 0.9,
+    "Fall 2019": 0.4,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4365",
+   "name": "Pleasant St @ Reedsdale Rd",
+   "town": "Milton",
+   "lat": 42.247533,
+   "lon": -71.067362,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 6,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0,
+    "Fall 2018": 0.6,
+    "Fall 2019": 0.1,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4316",
+   "name": "Whitwell St @ Maywood Ave",
+   "town": "Quincy",
+   "lat": 42.248975,
+   "lon": -71.009571,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 6,
+   "seasons": {
+    "Fall 2016": 0.7,
+    "Fall 2017": 0.5,
+    "Fall 2018": 0.8,
+    "Fall 2019": 0.4,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4334",
+   "name": "Edge Hill Rd @ Westvale Rd",
+   "town": "Milton",
+   "lat": 42.254601,
+   "lon": -71.050131,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 6,
+   "seasons": {
+    "Fall 2016": 0,
+    "Fall 2017": 0.2,
+    "Fall 2018": 0.2,
+    "Fall 2019": 0.2,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  },
+  {
+   "id": "4341",
+   "name": "Pleasant St opp Mathaurs St",
+   "town": "Milton",
+   "lat": 42.249763,
+   "lon": -71.064223,
+   "routes": [
+    "245"
+   ],
+   "busesPerDay": 16,
+   "yearsAtZero": 6,
+   "seasons": {
+    "Fall 2016": 0.8,
+    "Fall 2017": 0.1,
+    "Fall 2018": 0.6,
+    "Fall 2019": 0.9,
+    "Fall 2020": 0,
+    "Fall 2021": 0,
+    "Fall 2022": 0,
+    "Fall 2023": 0,
+    "Fall 2024": 0,
+    "Fall 2025": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+---
+import { render } from 'astro:content';
+import type { Post } from '../lib/posts';
+import { formatDay, isoDay } from '../lib/format';
+
+type Props = { post: Post };
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<article>
+  <div class="box">
+<table class="page-head">
+    <tbody>
+      <tr>
+        <td class="no">No. {String(post.data.no).padStart(2, '0')}</td>
+        <td><h1 class="title">{post.data.title}</h1></td>
+        <td class="num wide"><time datetime={isoDay(post.data.date)}>{formatDay(isoDay(post.data.date))}</time></td>
+        <td class="num wide">{post.data.source}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="prose">
+    <Content />
+  </div>
+</article>

@@ -1,0 +1,21 @@
+---
+/* The home page is the latest post, so the charts are the first thing anyone sees. */
+import Base from '../layouts/Base.astro';
+import PostView from '../components/PostView.astro';
+import { getPosts, postHref, postTheme } from '../lib/posts';
+
+const [latest] = await getPosts();
+---
+
+{
+  latest ? (
+    <Base title="Seth Kaplan" current={{ kind: 'post', id: latest.id }} theme={postTheme(latest)}>
+      <link rel="canonical" href={new URL(postHref(latest), Astro.site)} slot="head" />
+      <PostView post={latest} />
+    </Base>
+  ) : (
+    <Base title="Seth Kaplan" current={{ kind: 'none' }}>
+      <p>No posts yet.</p>
+    </Base>
+  )
+}

@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+// Self-hosted face for the snow theme. Browsers only download it when a page renders it.
+import '@fontsource-variable/hanken-grotesk';
+import Index from '../components/Index.astro';
+import type { Current } from '../lib/nav';
+import { DEFAULT_THEME, resolveTheme, themeStyle, type Theme } from '../lib/themes';
+
+type Props = {
+  title: string;
+  description?: string;
+  current: Current;
+  /** Defaults to the site theme; posts pass their own. */
+  theme?: Theme;
+};
+const {
+  title,
+  description = 'Posts and charts about the T, by Seth Kaplan.',
+  current,
+  theme = resolveTheme(DEFAULT_THEME),
+} = Astro.props;
+const pageTitle = title === 'Seth Kaplan' ? title : `${title} · Seth Kaplan`;
+---
+
+<!doctype html>
+<html lang="en" style={themeStyle(theme)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={theme.paper} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="shell">
+      <Index current={current} />
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+---
+/* The stops where the MBTA's counts keep finding nobody: a top-N table. */
+import { busCounts, rankedLonelyStops, seasonYear } from '../lib/busCounts';
+import { formatDay } from '../lib/format';
+
+type Props = { count?: number };
+const { count = 10 } = Astro.props;
+const { loneliestStops, stopSummary, scheduleDate } = busCounts;
+const rows = rankedLonelyStops(count).map(({ stop, rank, tied }) => ({ s: stop, rank, tied }));
+const stops = rows.map((r) => r.s);
+const years = [...new Set(loneliestStops.flatMap((s) => Object.keys(s.seasons)).map(seasonYear))].toSorted((a, b) => a - b);
+const firstYear = years[0] ?? 0;
+const lastYear = years[years.length - 1] ?? 0;
+const n = (x: number) => x.toLocaleString('en-US');
+const label = (s: (typeof stops)[number]) =>
+  `Nobody counted for ${s.yearsAtZero} straight falls` +
+  (s.yearsAtZero < years.length ? `; before that, ${years
+    .map((y) => s.seasons[`Fall ${y}`])
+    .filter((v): v is number => v !== undefined && v >= 0.05)
+    .map((v) => v.toFixed(1))
+    .join(', ')} a weekday` : '');
+---
+
+<figure class="fig" aria-labelledby="stops-h">
+  <div class="fig-head">
+    <h2 id="stops-h">The {count} loneliest bus stops{stops.length > count ? ` (${stops.length} with ties)` : ''}</h2>
+    <span>{n(stopSummary.stopsAtZero)} of {n(stopSummary.stopsCounted)} stops averaged nobody in {stopSummary.season}</span>
+  </div>
+  <div class="stops-wrap">
+    <div class="box">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Stop</th>
+            <th>Route</th>
+            <th class="num">Buses a weekday</th>
+            <th>Fall {firstYear}–{String(lastYear).slice(2)}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map(({ s, rank, tied }) => (
+              <tr>
+                <td class="nowrap">{tied ? '=' : ''}{String(rank).padStart(2, '0')}</td>
+                <td>
+                  <b>{s.name}</b>
+                  <span class="town">{s.town}</span>
+                </td>
+                <td>{s.routes.join(', ')}</td>
+                <td class="num">{s.busesPerDay}</td>
+                <td>
+                  <svg class="strip" viewBox={`0 0 ${years.length * 14} 14`} role="img" aria-label={label(s)}>
+                    {years.map((y, j) => {
+                      const v = s.seasons[`Fall ${y}`];
+                      const cx = j * 14 + 7;
+                      if (v === undefined) return <circle class="nc" cx={cx} cy="7" r="1.2" />;
+                      return v < 0.05 ? (
+                        <circle class="gone" cx={cx} cy="7" r="5" />
+                      ) : (
+                        <circle class="dot" cx={cx} cy="7" r={Math.min(5.5, 2 + Math.sqrt(v))} />
+                      );
+                    })}
+                  </svg>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="fig-caption">
+    <span>
+      Ranked by consecutive falls with nobody getting on or off (fewer than 0.05 a weekday, all routes combined), then by
+      buses stopping on {formatDay(scheduleDate)}. "=" marks a tie. Dashed: a fall with nobody. Dot: someone. Speck: not counted.
+    </span>
+    <span>Source: MBTA ridership counts and schedules</span>
+  </div>
+</figure>
+
+<style>
+  .stops-wrap {
+    padding: 8px;
+  }
+  td {
+    vertical-align: middle;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .town {
+    display: block;
+    font-size: var(--text-meta);
+    color: var(--mute);
+  }
+  .strip {
+    display: block;
+    width: 190px;
+    height: 19px;
+  }
+  .gone {
+    fill: none;
+    stroke: var(--mute);
+    stroke-width: 1.5;
+    stroke-dasharray: 2.2 1.6;
+  }
+  .dot {
+    fill: var(--ink);
+  }
+  .nc {
+    fill: var(--mute);
+  }
+  @media (max-width: 640px) {
+    th:nth-child(3),
+    td:nth-child(3) {
+      display: none;
+    }
+    .strip {
+      width: 120px;
+      height: 12px;
+    }
+  }
+</style>

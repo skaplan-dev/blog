@@ -1,0 +1,35 @@
+---
+no: 1
+title: The Loneliest Bus Stops on the T
+shortTitle: The loneliest stops
+date: 2026-11-26
+source: 'Data: MBTA ridership counts'
+draft: false
+theme: snow
+---
+
+import LonelyStops from '../../components/LonelyStops.astro';
+import StopCity from '../../components/StopCity.astro';
+import WaitWithIt from '../../components/WaitWithIt.astro';
+import Snow from '../../components/charts/Snow';
+import NextBus from '../../components/charts/NextBus';
+
+<Snow client:idle fixed density={5} />
+
+Transit is lonely. You share a train car with hundreds of strangers every morning, never knowing a name or where they're off to. You wait in the cold for a bus that's always somewhere else. And sometimes the bus comes for no one at all.
+
+There's beauty in a bus running with no one inside. It's like a birdhouse nobody has moved into, or porch lights left on for a friend who bailed. A consistent opportunity and an afterthought.
+
+In **Milton**, a driver on the **245** passes a sign at **Brook Rd @ Windsor Rd** sixteen times a day. In **10** years of counts, the MBTA hasn't counted anyone waiting there.
+
+<WaitWithIt />
+
+<StopCity />
+
+<LonelyStops />
+
+<WaitWithIt ending />
+
+<p className="coda">Sixteen&nbsp;times&nbsp;a&nbsp;day, just&nbsp;in&nbsp;case.</p>
+
+<NextBus client:visible />

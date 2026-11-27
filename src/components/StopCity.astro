@@ -1,0 +1,32 @@
+---
+/* The map: start at the empty stop, then pull back until it is one speck among thousands. */
+import StopCity, { type CityStep } from './charts/StopCity';
+
+const BROOK_RD = { lon: -71.086209, lat: 42.260741 };
+
+const steps: CityStep[] = [
+  {
+    title: 'Brook Rd @ Windsor Rd',
+    body: 'Brook Rd @ Windsor Rd seems like the perfect place for a bus stop. It sits next to a school, a park, and two ballfields. But in Milton, 94.4% of households own at least one car. When they come, they park in the lot down the street.',
+    source: 'Car ownership: Census Bureau ACS, via Data USA',
+    view: { longitude: -71.086209, latitude: 42.259541, zoom: 16.2, pitch: 50, bearing: 10 },
+  },
+  {
+    title: 'Its neighbors',
+    body: 'Each column is a bus stop, as tall as the number of people who get on or off there on an average weekday. Nearby, a few people a day.',
+    view: { longitude: -71.082209, latitude: 42.248741, zoom: 13.4, pitch: 50, bearing: 0 },
+  },
+  {
+    title: 'Forest Hills: 14,086 a day',
+    body: '3 miles north, the busiest bus stop on the T. 9 routes stop there.',
+    view: { longitude: -71.09992, latitude: 42.260611, zoom: 11.6, pitch: 52, bearing: -12 },
+  },
+  {
+    title: 'One of 6,525 stops on the map',
+    body: "From here, Brook Rd @ Windsor Rd is a speck. In Fall 2025, 145 stops averaged nobody; they're the hollow rings.",
+    view: { longitude: -71.07, latitude: 42.3, zoom: 9.9, pitch: 40, bearing: 0 },
+  },
+];
+---
+
+<StopCity client:visible steps={steps} focus={BROOK_RD} dataUrl="/data/bus-stops.json" />

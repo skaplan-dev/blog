@@ -1,0 +1,58 @@
+---
+import Page from '../layouts/Page.astro';
+import JobTable from '../components/JobTable.astro';
+import { contact, education, skills, volunteer, work } from '../lib/resume';
+---
+
+<Page title="Resume" page="resume" note={contact.location}>
+  <ul class="links">
+    <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+    <li><a href={contact.github.href}>{contact.github.label}</a></li>
+    <li><a href={contact.linkedin.href}>{contact.linkedin.label}</a></li>
+  </ul>
+
+  <JobTable label="Work" jobs={work} />
+  <JobTable label="Volunteer" jobs={volunteer} />
+
+  <div class="box">
+<table>
+    <thead><tr><th class="when">When</th><th>Education</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="when">{education.when}</td>
+        <td><b>{education.degree}</b><br />{education.school}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div class="box">
+<table>
+    <thead><tr><th class="when">Skills</th><th>Tools</th></tr></thead>
+    <tbody>
+      {
+        skills.map((s) => (
+          <tr>
+            <td class="when">{s.area}</td>
+            <td>{s.list}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+</Page>
+
+<style>
+  .links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    font-size: var(--text-meta);
+    margin-bottom: 16px;
+  }
+  .when {
+    width: 170px;
+  }
+</style>

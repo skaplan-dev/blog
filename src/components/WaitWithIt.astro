@@ -1,0 +1,18 @@
+---
+/* The waiting scene. `ending` turns it into the post's last image: someone finally waits here. */
+import WaitWithIt from './charts/WaitWithIt';
+import { BROOK_RD_TIMES } from '../lib/brookRd';
+
+type Props = { ending?: boolean };
+const { ending = false } = Astro.props;
+---
+
+<WaitWithIt
+  client:visible
+  stop="Brook Rd @ Windsor Rd"
+  town="Milton"
+  route="245"
+  times={BROOK_RD_TIMES}
+  yearsAtZero={10}
+  ending={ending}
+/>

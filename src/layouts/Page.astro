@@ -1,0 +1,37 @@
+---
+/* A plain page (resume, projects, about, contact): header row, then content. */
+import Base from './Base.astro';
+import type { PageKey } from '../lib/nav';
+
+type Props = { title: string; page: PageKey; note?: string };
+const { title, page, note } = Astro.props;
+---
+
+<Base title={title} current={{ kind: 'page', page }}>
+  <div class="box">
+<table class="page-head">
+    <tbody>
+      <tr>
+        <td><h1 class="title">{title}</h1></td>
+        {note && <td class="num wide">{note}</td>}
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="page-body">
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .page-body {
+    margin-top: 16px;
+  }
+  .page-body :global(p) {
+    max-width: 64ch;
+    margin-bottom: 12px;
+  }
+  .page-body :global(.box) {
+    margin-bottom: 24px;
+  }
+</style>

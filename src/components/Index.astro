@@ -1,0 +1,118 @@
+---
+import { getPosts, postHref } from '../lib/posts';
+import { formatIndexDate } from '../lib/format';
+import { PAGES, type Current } from '../lib/nav';
+
+type Props = { current: Current };
+const { current } = Astro.props;
+const posts = await getPosts();
+const isCurrentPost = (id: string) => current.kind === 'post' && current.id === id;
+---
+
+<nav class="index" aria-label="Site">
+  <div class="box">
+    <table>
+      <tbody>
+        <tr class="who">
+          <td colspan="3"><a href="/">Seth Kaplan<span>Posts, charts &amp; schedules</span></a></td>
+        </tr>
+      </tbody>
+      <tbody class="posts">
+        <tr><th>No.</th><th>Post</th><th class="num">Date</th></tr>
+        {
+          posts.map((post) => (
+            <tr class:list={{ on: isCurrentPost(post.id) }}>
+              <td>{String(post.data.no).padStart(2, '0')}</td>
+              <td>
+                <a href={postHref(post)} aria-current={isCurrentPost(post.id) ? 'page' : undefined}>
+                  {post.data.shortTitle ?? post.data.title}
+                </a>
+              </td>
+              <td class="num">{post.data.draft ? 'draft' : formatIndexDate(post.data.date)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="box links">
+    {
+      PAGES.map((page) => {
+        const on = current.kind === 'page' && current.page === page.key;
+        return (
+          <li class:list={{ on }}>
+            <a href={page.href} aria-current={on ? 'page' : undefined}>{page.label}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<style>
+  .index {
+    position: sticky;
+    top: 24px;
+    display: grid;
+    gap: 12px;
+  }
+  .index a {
+    display: block;
+    text-decoration: none;
+  }
+  .who td {
+    font-family: var(--font-display);
+    font-weight: var(--strong-weight);
+    font-size: var(--text-lead);
+    line-height: 1.2;
+    padding-block: 8px;
+  }
+  .who span {
+    display: block;
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: var(--text-meta);
+    margin-top: 2px;
+    color: var(--mute);
+  }
+  tr.on td,
+  li.on {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .posts tr:not(.on):hover td,
+  .links li:not(.on):hover {
+    background: var(--hover);
+  }
+  .links {
+    list-style: none;
+  }
+  .links li + li {
+    border-top: var(--rule);
+  }
+  .links a {
+    padding: 5px 8px;
+  }
+
+  @media (max-width: 860px) {
+    .index {
+      position: static;
+      gap: 8px;
+    }
+    .posts {
+      display: none;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .links li + li {
+      border-top: 0;
+      border-left: var(--rule);
+    }
+    .links a {
+      text-align: center;
+    }
+  }
+</style>
