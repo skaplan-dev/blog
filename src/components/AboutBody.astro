@@ -61,7 +61,13 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
         </table>
       </div>
 
-      <p class="blurb">{card.blurb}</p>
+      <div class="blurb">
+        <p>{card.blurb}</p>
+        <figure class="cat">
+          <img src={card.catPhoto} alt="Seth's cat, a grey tabby, glaring at the camera from a rust-colored blanket." />
+          <figcaption>{card.catCaption}</figcaption>
+        </figure>
+      </div>
     </div>
     <p class="imprint">★★ © 2026 sethwashere.com, inc. prtd in u.s.a.</p>
   </section>
@@ -321,10 +327,38 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
     margin: 0 2.4cqi 2.4cqi;
     background: var(--b-red);
     border: 0.8cqi solid var(--b-green);
-    padding: 3cqi 3.8cqi;
-    font-size: 5cqi;
+    padding: 3cqi 3.4cqi 3cqi 3.8cqi;
+    font-size: 4.2cqi;
     font-weight: 500;
     line-height: 1.3;
+    display: grid;
+    grid-template-columns: 1fr 30cqi;
+    gap: 3.4cqi;
+    align-items: center;
+  }
+  /* the cat, printed like an inset photo: cardboard mat, green keyline, condensed caption */
+  .cat {
+    background: var(--b-board);
+    border: 0.6cqi solid var(--b-green);
+    padding: 1.2cqi 1.2cqi 0.8cqi;
+    rotate: 2deg;
+  }
+  .cat img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: saturate(0.85) sepia(0.12);
+  }
+  .cat figcaption {
+    margin-top: 0.8cqi;
+    text-align: center;
+    font-family: 'Barlow Condensed', var(--font);
+    font-weight: 700;
+    font-size: 3.2cqi;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--b-green);
   }
   .imprint {
     padding: 1.4cqi 2cqi 0;

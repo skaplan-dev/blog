@@ -18,6 +18,9 @@ export const card = {
   /** The paragraph in the red box at the bottom of the back. */
   blurb:
     'Seth likes coding, baseball and trains. Co-lead at TransitMatters since 2021; went from Software Engineer to Tech Lead at HubSpot.',
+  /** Photo in the bio box on the back, and its caption. */
+  catPhoto: '/cat.jpg',
+  catCaption: 'Clubhouse cat',
   /** Path under public/, e.g. '/seth.jpg'. */
   photo: '/seth.jpg',
 } satisfies Record<string, string | null>;
