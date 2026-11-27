@@ -3,9 +3,6 @@
    The front borrows the mid-'70s layout (two-tone border, drop-shadowed word on top, rounded
    photo frame, a baseball in the corner); none of a real set's marks. Data lives in src/lib/card.ts. */
 import { card, seasons } from '../lib/card';
-// Phosphor icons (duotone), inlined so they take the card's ink via currentColor.
-import tram from '@phosphor-icons/core/assets/duotone/tram-duotone.svg?raw';
-import baseball from '@phosphor-icons/core/assets/duotone/baseball-duotone.svg?raw';
 // Tabler's baseball: diagonal seams with stitches, reads as a ball even small.
 import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
 ---
@@ -24,32 +21,25 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
     <div class="ball" aria-hidden="true" set:html={baseballFront} />
   </section>
 
-  <!-- The back follows a '70s card back: vitals and a cartoon up top, a green name band,
-       the career record, a red blurb box and the printer's line. -->
+  <!-- The back follows a 1975 card back: a red vitals panel, a green name band with the card
+       number, the record table on bare cardboard, a red bio box, and the printer's line. -->
   <section class="card back" aria-label="Card back">
     <div class="sheet">
-      <div class="top">
-        <p class="vit">
-          Bats: {card.bats} &nbsp;Throws: {card.throws}<br />
-          Fav team: {card.favTeam}<br />
-          Home: {card.home}
-        </p>
-        <div class="cartoon" aria-hidden="true">
-          <span class="icon ball-icon" set:html={baseball} />
-          <span class="icon tram-icon" set:html={tram} />
-        </div>
-        <p class="trivia">
-          Fun fact: {card.funFact ?? <span class="todo">one line about you</span>}
-        </p>
-      </div>
+      <dl class="top">
+        <div><dt>Bats</dt><dd>{card.bats}</dd></div>
+        <div><dt>Throws</dt><dd>{card.throws}</dd></div>
+        <div><dt>Loves</dt><dd>{card.loves}</dd></div>
+        <div><dt>Fav team</dt><dd>{card.favTeam}</dd></div>
+        <div class="span2"><dt>Home</dt><dd>{card.home}</dd></div>
+      </dl>
 
       <div class="band">
         <span class="num">{card.no}</span>
-        <span class="nm">{card.name} <span aria-hidden="true">•</span> {card.pos}</span>
+        <span class="nm">{card.name}<span class="dot" aria-hidden="true">•</span>{card.pos}</span>
       </div>
 
       <div class="record">
-        <h3>Career record</h3>
+        <h3>Major and minor league career record</h3>
         <table>
           <thead>
             <tr><th>Year</th><th>Club</th><th>Pos</th></tr>
@@ -73,7 +63,7 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
 
       <p class="blurb">{card.blurb}</p>
     </div>
-    <p class="imprint">© 2026 sethwashere.com · Prtd in U.S.A.</p>
+    <p class="imprint">★★ © 2026 sethwashere.com, inc. prtd in u.s.a.</p>
   </section>
 </div>
 
@@ -196,136 +186,120 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
     display: none;
   }
 
-  /* ---------- back: green and red ink on grey-brown cardboard ---------- */
+  /* ---------- back: a 1975 card back ----------
+     Two spot inks (green, red) on grey-brown cardboard; where they overprint, the red
+     reads as a softer salmon. Vitals and bio set in a Franklin Gothic stand-in, the name band
+     and record in a condensed gothic, everything in caps the way Topps-era backs were. */
   .back {
-    --b-board: #b5a98e;
-    --b-green: #2c7a52;
-    --b-red: #cf5446;
-    --b-salmon: #de8a78;
-    --b-ink: #1d3a2a;
+    --b-board: #b8ab8f;
+    --b-green: #2b6a46;
+    --b-red: #c94f3f;
+    --b-salmon: #d98a76;
+    --b-ink: #1e3b2b; /* dark green: text printed over the red */
 
     background: var(--b-board);
     border: 7px solid var(--b-board);
     color: var(--b-ink);
     display: flex;
     flex-direction: column;
-    font-family: 'Barlow Condensed', var(--font);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
+    font-family: 'Libre Franklin', var(--font);
   }
   .back a {
     color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
   }
   .sheet {
     flex: 1;
     display: flex;
     flex-direction: column;
-    border: 1cqi solid var(--b-green);
-    border-radius: 1.2cqi;
+    border: 1.1cqi solid var(--b-green);
+    border-radius: 1cqi 14cqi 1cqi 1cqi;
     overflow: hidden;
-    font-size: 4.2cqi;
-    line-height: 1.15;
   }
 
-  /* vitals, cartoon arch, trivia strip */
+  /* vitals: one red panel, label over value, like the vitals block on a '70s back */
   .top {
     display: grid;
-    grid-template-columns: 1fr 40cqi;
-    grid-template-rows: 1fr auto;
-    border-bottom: 1cqi solid var(--b-green);
-  }
-  .vit {
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 2.4cqi 3cqi;
     background: var(--b-red);
-    padding: 2.6cqi 3cqi;
-    font-size: 4.4cqi;
-    text-transform: none;
+    padding: 3.4cqi 3.8cqi;
+    border-bottom: 1.1cqi solid var(--b-green);
   }
-  .trivia {
-    grid-column: 1;
-    background: var(--b-salmon);
-    border-top: 1cqi solid var(--b-green);
-    padding: 1.6cqi 3cqi;
-    text-transform: none;
+  .top .span2 {
+    grid-column: span 2;
   }
-  .cartoon {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    margin: 2cqi 2cqi 0 0;
-    background: var(--b-salmon);
-    border: 1cqi solid var(--b-green);
-    border-bottom: 0;
-    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
-    display: grid;
-    place-items: center;
-    padding: 4cqi 2cqi 1cqi;
-    position: relative;
-    color: var(--b-green);
+  .top dt {
+    font-size: 2.6cqi;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
   }
-  .icon {
-    display: block;
-  }
-  .icon :global(svg) {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .tram-icon {
-    width: 62%;
-  }
-  /* the ball sails in over the car's shoulder */
-  .ball-icon {
-    position: absolute;
-    top: 14%;
-    left: 12%;
-    width: 24%;
-    rotate: -20deg;
+  .top dd {
+    font-family: 'Barlow Condensed', var(--font);
+    font-size: 6cqi;
+    font-weight: 700;
+    line-height: 1.05;
+    text-transform: uppercase;
   }
 
-  /* green band with the card number and name */
+  /* green band: card number in a cardboard box, name and position reversed out */
   .band {
     display: flex;
     align-items: center;
-    gap: 4cqi;
+    gap: 5cqi;
     background: var(--b-green);
-    padding: 1.6cqi 3cqi;
+    padding: 1.8cqi 3.4cqi;
+    font-family: 'Barlow Condensed', var(--font);
+    text-transform: uppercase;
   }
   .num {
     background: var(--b-board);
     color: var(--b-green);
-    padding: 0.4cqi 1.6cqi;
-    font-size: 6cqi;
+    font-weight: 700;
+    font-size: 6.4cqi;
     line-height: 1;
+    padding: 0.6cqi 1.6cqi 0.4cqi;
   }
   .nm {
-    color: #efe5cc;
-    font-size: 6.6cqi;
+    color: #ece2c6;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    font-size: 7cqi;
+    letter-spacing: 0.04em;
     line-height: 1;
   }
+  .dot {
+    margin-inline: 2.4cqi;
+  }
 
-  /* career record: green rules on the bare cardboard */
+  /* record: green rules on bare cardboard, condensed caps */
   .record {
-    padding: 1.6cqi 3cqi 2cqi;
+    padding: 1.6cqi 3.4cqi 2cqi;
+    font-family: 'Barlow Condensed', var(--font);
+    text-transform: uppercase;
   }
   .record h3 {
-    font-size: 4.2cqi;
+    font-family: 'Libre Franklin', var(--font);
+    font-size: 3cqi;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     text-align: center;
-    border-bottom: 0.5cqi solid var(--b-green);
-    padding-bottom: 0.8cqi;
     color: var(--b-green);
+    padding-bottom: 1cqi;
+    border-bottom: 0.5cqi solid var(--b-green);
   }
   .record table {
-    font-size: 3.9cqi;
+    font-size: 3.7cqi;
   }
   .record th,
   .record td {
     border: 0;
-    padding: 0.6cqi 1.4cqi 0.6cqi 0;
+    padding: 0.5cqi 2cqi 0.5cqi 0;
+    font-size: inherit;
     font-weight: 500;
     letter-spacing: 0.02em;
-    font-size: inherit;
     text-transform: inherit;
   }
   .record thead th {
@@ -338,26 +312,27 @@ import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
   }
   .yrs {
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* red blurb box */
+  /* bio: red box ruled in green */
   .blurb {
     flex: 1;
-    margin: 0 2cqi 2cqi;
+    margin: 0 2.4cqi 2.4cqi;
     background: var(--b-red);
     border: 0.8cqi solid var(--b-green);
-    padding: 2cqi 3cqi;
-    font-family: var(--font);
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 4.4cqi;
+    padding: 3cqi 3.8cqi;
+    font-size: 5cqi;
+    font-weight: 500;
     line-height: 1.3;
   }
   .imprint {
-    font-size: 2.6cqi;
+    padding: 1.4cqi 2cqi 0;
+    font-family: 'Libre Franklin', var(--font);
+    font-size: 2.4cqi;
+    font-weight: 800;
     letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--b-green);
-    padding: 1.2cqi 2cqi 0;
   }
 </style>

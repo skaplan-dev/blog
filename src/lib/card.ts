@@ -11,10 +11,10 @@ export const card = {
   /** Short position after the name on the back. */
   pos: 'SWE',
   home: 'Greater Boston, MA',
-  bats: 'R',
-  throws: 'R',
+  bats: 'Right',
+  throws: 'Right',
   favTeam: 'Red Sox',
-  funFact: 'Seth loves alligators.',
+  loves: 'Alligators',
   /** The paragraph in the red box at the bottom of the back. */
   blurb:
     'Seth likes coding, baseball and trains. Co-lead at TransitMatters since 2021; went from Software Engineer to Tech Lead at HubSpot.',
