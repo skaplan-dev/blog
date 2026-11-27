@@ -1,0 +1,36 @@
+---
+/* One stop's falls as a row of marks: a dashed ring for a fall with nobody, a dot for someone, a speck for not counted. */
+type Props = { seasons: Record<string, number>; years: number[]; label: string; class?: string };
+const { seasons, years, label, class: className } = Astro.props;
+---
+
+<svg class:list={['strip', className]} viewBox={`0 0 ${years.length * 14} 14`} role="img" aria-label={label}>
+  {
+    years.map((y, j) => {
+      const v = seasons[`Fall ${y}`];
+      const cx = j * 14 + 7;
+      if (v === undefined) return <circle class="nc" cx={cx} cy="7" r="1.2" />;
+      return v < 0.05 ? <circle class="gone" cx={cx} cy="7" r="5" /> : <circle class="dot" cx={cx} cy="7" r={Math.min(5.5, 2 + Math.sqrt(v))} />;
+    })
+  }
+</svg>
+
+<style>
+  .strip {
+    display: block;
+    width: 190px;
+    height: 19px;
+  }
+  .gone {
+    fill: none;
+    stroke: var(--mute);
+    stroke-width: 1.5;
+    stroke-dasharray: 2.2 1.6;
+  }
+  .dot {
+    fill: var(--ink);
+  }
+  .nc {
+    fill: var(--mute);
+  }
+</style>

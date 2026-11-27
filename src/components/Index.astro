@@ -96,17 +96,36 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     padding: 5px 8px;
   }
 
+  /* Touch screens: every nav row is a 44px target. */
+  @media (pointer: coarse) {
+    .links a {
+      padding-block: 11px;
+    }
+    /* The link, not the cell, takes the height, so the whole row answers a tap. */
+    .posts a {
+      padding-block: 10px;
+      margin-block: -5px;
+    }
+    .posts td {
+      vertical-align: middle;
+    }
+  }
+
   @media (max-width: 860px) {
     .index {
       position: static;
       gap: 8px;
     }
-    .posts {
+    /* Phones keep the post list, the only way to a post; the date column goes. */
+    .posts th:nth-child(3),
+    .posts td:nth-child(3) {
       display: none;
     }
+    /* One equal column per page link, however many there are. */
     .links {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
     }
     .links li + li {
       border-top: 0;

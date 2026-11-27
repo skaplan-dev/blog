@@ -14,7 +14,14 @@ const { Content } = await render(post);
     <tbody>
       <tr>
         <td class="no">No. {String(post.data.no).padStart(2, '0')}</td>
-        <td><h1 class="title">{post.data.title}</h1></td>
+        <td>
+          <h1 class="title">{post.data.title}</h1>
+          {/* Phones hide the date and source cells, so they print under the title instead. */}
+          <p class="phone-meta mute">
+            <time datetime={isoDay(post.data.date)}>{formatDay(isoDay(post.data.date))}</time>{' · '}
+            {post.data.sourceHref ? <a href={post.data.sourceHref}>{post.data.source}</a> : post.data.source}
+          </p>
+        </td>
         <td class="num wide"><time datetime={isoDay(post.data.date)}>{formatDay(isoDay(post.data.date))}</time></td>
         <td class="num wide">{post.data.sourceHref ? <a href={post.data.sourceHref}>{post.data.source}</a> : post.data.source}</td>
       </tr>
@@ -25,3 +32,16 @@ const { Content } = await render(post);
     <Content />
   </div>
 </article>
+
+<style>
+  .phone-meta {
+    display: none;
+    margin-top: 6px;
+    font-size: var(--text-meta);
+  }
+  @media (max-width: 860px) {
+    .phone-meta {
+      display: block;
+    }
+  }
+</style>

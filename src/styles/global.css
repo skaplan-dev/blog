@@ -339,6 +339,20 @@ li {
     align-items: flex-end;
     padding: 0 12px 24px;
   }
+  /* On a phone the words scroll up off the haze and across the city's columns, so each card
+     carries its own drift of snow: blurred paper, no edge, never a panel. */
+  .city-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .city-card::before {
+    content: '';
+    position: absolute;
+    inset: -14px -10px;
+    z-index: -1;
+    background: color-mix(in srgb, var(--paper) 80%, transparent);
+    filter: blur(10px);
+  }
 }
 
 /* ---------- wait with it: a speck in a field of snow ---------- */

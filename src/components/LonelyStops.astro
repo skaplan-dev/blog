@@ -2,6 +2,7 @@
 /* The stops where the MBTA's counts keep finding nobody: a top-N table. */
 import { busCounts, rankedLonelyStops, seasonYear } from '../lib/busCounts';
 import { formatDay } from '../lib/format';
+import StopStrip from './StopStrip.astro';
 
 type Props = { count?: number };
 const { count = 10 } = Astro.props;
@@ -32,10 +33,10 @@ const label = (s: (typeof stops)[number]) =>
         <thead>
           <tr>
             <th>No.</th>
-            <th>Stop</th>
+            <th>Stop<span class="phone"> · Fall {firstYear}–{String(lastYear).slice(2)}</span></th>
             <th>Route</th>
-            <th class="num">Buses a weekday</th>
-            <th>Fall {firstYear}–{String(lastYear).slice(2)}</th>
+            <th class="num wide">Buses a weekday</th>
+            <th class="wide">Fall {firstYear}–{String(lastYear).slice(2)}</th>
           </tr>
         </thead>
         <tbody>
@@ -45,23 +46,13 @@ const label = (s: (typeof stops)[number]) =>
                 <td class="nowrap">{tied ? '=' : ''}{String(rank).padStart(2, '0')}</td>
                 <td>
                   <b><a href={`https://www.mbta.com/stops/${s.id}`}>{s.name}</a></b>
-                  <span class="town">{s.town}</span>
+                  <span class="town">{s.town}<span class="phone"> · {s.busesPerDay} buses a weekday</span></span>
+                  <StopStrip class="phone" seasons={s.seasons} years={years} label={label(s)} />
                 </td>
                 <td>{s.routes.join(', ')}</td>
-                <td class="num">{s.busesPerDay}</td>
-                <td>
-                  <svg class="strip" viewBox={`0 0 ${years.length * 14} 14`} role="img" aria-label={label(s)}>
-                    {years.map((y, j) => {
-                      const v = s.seasons[`Fall ${y}`];
-                      const cx = j * 14 + 7;
-                      if (v === undefined) return <circle class="nc" cx={cx} cy="7" r="1.2" />;
-                      return v < 0.05 ? (
-                        <circle class="gone" cx={cx} cy="7" r="5" />
-                      ) : (
-                        <circle class="dot" cx={cx} cy="7" r={Math.min(5.5, 2 + Math.sqrt(v))} />
-                      );
-                    })}
-                  </svg>
+                <td class="num wide">{s.busesPerDay}</td>
+                <td class="wide">
+                  <StopStrip seasons={s.seasons} years={years} label={label(s)} />
                 </td>
               </tr>
             ))
@@ -94,31 +85,28 @@ const label = (s: (typeof stops)[number]) =>
     font-size: var(--text-meta);
     color: var(--mute);
   }
-  .strip {
-    display: block;
-    width: 190px;
-    height: 19px;
-  }
-  .gone {
-    fill: none;
-    stroke: var(--mute);
-    stroke-width: 1.5;
-    stroke-dasharray: 2.2 1.6;
-  }
-  .dot {
-    fill: var(--ink);
-  }
-  .nc {
-    fill: var(--mute);
+  /* Phone-only copies; .box raises these over StopStrip's own scoped display rule. */
+  .box span.phone,
+  .box :global(svg.phone) {
+    display: none;
   }
   @media (max-width: 640px) {
     th:nth-child(3),
     td:nth-child(3) {
       display: none;
     }
-    .strip {
-      width: 120px;
-      height: 12px;
+    /* Buses and the falls strip move under the stop name, so the table fits a phone. */
+    .wide {
+      display: none;
+    }
+    .box span.phone {
+      display: inline;
+    }
+    .box :global(svg.phone) {
+      display: block;
+      width: 140px;
+      height: 14px;
+      margin-top: 6px;
     }
   }
 </style>
