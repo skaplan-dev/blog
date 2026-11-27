@@ -3,6 +3,7 @@ import { getPosts, postHref } from '../lib/posts';
 import { formatIndexDate } from '../lib/format';
 import { PAGES, type Current } from '../lib/nav';
 import { AUTHOR, SITE_NAME } from '../lib/seo';
+import chevron from '@tabler/icons/outline/chevron-down.svg?raw';
 
 type Props = { current: Current };
 const { current } = Astro.props;
@@ -10,15 +11,23 @@ const posts = await getPosts();
 const isCurrentPost = (id: string) => current.kind === 'post' && current.id === id;
 ---
 
-<nav class="index" aria-label="Site">
+<nav class="index" aria-label="Site" data-index>
   <div class="box">
     <table>
       <tbody>
         <tr class="who">
-          <td colspan="3"><a href="/">{SITE_NAME}<span>by {AUTHOR}</span></a></td>
+          <td colspan="3">
+            <div class="who-row">
+              <a href="/">{SITE_NAME}<span>by {AUTHOR}</span></a>
+              {/* Phones only: the post list and page links fold behind this. */}
+              <button type="button" class="menu" aria-expanded="false" aria-controls="index-posts index-links">
+                Index<span class="chev" set:html={chevron} />
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
-      <tbody class="posts">
+      <tbody class="posts" id="index-posts">
         <tr><th>No.</th><th>Post</th><th class="num">Date</th></tr>
         {
           posts.map((post) => (
@@ -37,7 +46,7 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     </table>
   </div>
 
-  <ul class="box links">
+  <ul class="box links" id="index-links">
     {
       PAGES.map((page) => {
         const on = current.kind === 'page' && current.page === page.key;
@@ -50,6 +59,17 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     }
   </ul>
 </nav>
+
+<script>
+  for (const nav of document.querySelectorAll<HTMLElement>('[data-index]')) {
+    const button = nav.querySelector('.menu');
+    button?.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('open', open);
+    });
+  }
+</script>
 
 <style>
   .index {
@@ -69,6 +89,12 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     line-height: 1.2;
     padding-block: 8px;
   }
+  .who-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
   .who span {
     display: block;
     font-family: var(--font);
@@ -76,6 +102,39 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     font-size: var(--text-meta);
     margin-top: 2px;
     color: var(--mute);
+  }
+  .menu {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    min-height: 44px;
+    padding: 0 4px 0 12px;
+    margin-block: -6px;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-family: var(--font);
+    font-size: var(--text-body);
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .chev {
+    display: flex;
+  }
+  .chev :global(svg) {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+    transition: rotate 0.2s ease-out;
+  }
+  .open .chev :global(svg) {
+    rotate: 180deg;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chev :global(svg) {
+      transition: none;
+    }
   }
   tr.on td,
   li.on {
@@ -133,6 +192,17 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     }
     .links a {
       text-align: center;
+    }
+  }
+
+  /* Phones fold the index into the masthead. Without scripts the button can't work, so it all stays out. */
+  @media (max-width: 860px) and (scripting: enabled) {
+    .menu {
+      display: flex;
+    }
+    .index:not(.open) .posts,
+    .index:not(.open) .links {
+      display: none;
     }
   }
 </style>
