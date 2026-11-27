@@ -2,6 +2,7 @@
 import { getPosts, postHref } from '../lib/posts';
 import { formatIndexDate } from '../lib/format';
 import { PAGES, type Current } from '../lib/nav';
+import { AUTHOR, SITE_NAME } from '../lib/seo';
 
 type Props = { current: Current };
 const { current } = Astro.props;
@@ -14,7 +15,7 @@ const isCurrentPost = (id: string) => current.kind === 'post' && current.id === 
     <table>
       <tbody>
         <tr class="who">
-          <td colspan="3"><a href="/">Seth Kaplan<span>Posts, charts &amp; schedules</span></a></td>
+          <td colspan="3"><a href="/">{SITE_NAME}<span>by {AUTHOR}</span></a></td>
         </tr>
       </tbody>
       <tbody class="posts">

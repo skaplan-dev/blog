@@ -8,6 +8,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { formatDay, isoDay } from './format';
 import { resolveTheme } from './themes';
 import type { Post } from './posts';
+import { AUTHOR, SITE_NAME } from './seo';
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -78,7 +79,7 @@ export const renderPostImage = async (post: Post): Promise<Uint8Array<ArrayBuffe
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: rule, paddingTop: 18, fontSize: 24 }}>
-        <div style={{ fontWeight: strong }}>Seth Kaplan · Posts, charts &amp; schedules</div>
+        <div style={{ fontWeight: strong }}>{SITE_NAME} · {AUTHOR}</div>
         <div style={{ color: t.mute }}>{post.data.source}</div>
       </div>
     </div>,

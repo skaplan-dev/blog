@@ -9,7 +9,7 @@ const posts = defineCollection({
     /** Post number, shown in the index and the header row. */
     no: z.number().int().positive(),
     title: z.string(),
-    /** One or two sentences for search results and link previews. */
+    /** For search results and link previews. Keep it under ~125 characters so previews don't cut it off. */
     description: z.string(),
     /** Shorter title for the index column, if the full one is long. */
     shortTitle: z.string().optional(),

@@ -2,9 +2,9 @@
 /* The home page shows the About page; /about/ is its canonical URL. */
 import Page from '../layouts/Page.astro';
 import AboutBody from '../components/AboutBody.astro';
-import { SITE_NAME } from '../lib/seo';
+import { AUTHOR, SITE_NAME } from '../lib/seo';
 ---
 
-<Page title="About" docTitle={SITE_NAME} page="about" canonical="/about/">
+<Page title="About" docTitle={`${SITE_NAME} · ${AUTHOR}`} page="about" canonical="/about/">
   <AboutBody />
 </Page>

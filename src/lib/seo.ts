@@ -1,7 +1,9 @@
 /* Site-wide SEO and link-preview settings. */
 import { card } from './card';
 
-export const SITE_NAME = 'Seth Kaplan';
+/** The site's name: browser tabs, link previews and the masthead. */
+export const SITE_NAME = 'Seth Was Here';
+export const AUTHOR = card.name;
 export const DEFAULT_DESCRIPTION =
   'Seth Kaplan: software engineer and TransitMatters co-lead in Greater Boston. Posts and charts about the T.';
 

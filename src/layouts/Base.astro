@@ -32,7 +32,7 @@ const {
   type = 'website',
   jsonLd = personLd(Astro.site),
 } = Astro.props;
-const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+const pageTitle = title.startsWith(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
 const url = new URL(canonical, Astro.site);
 const imageUrl = new URL(image.src, Astro.site);
 ---
@@ -62,6 +62,8 @@ const imageUrl = new URL(image.src, Astro.site);
     <meta property="og:image:height" content={String(image.height)} />
     <meta property="og:image:alt" content={image.alt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content={image.alt} />
 
