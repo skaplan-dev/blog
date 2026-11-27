@@ -9,11 +9,15 @@ const posts = defineCollection({
     /** Post number, shown in the index and the header row. */
     no: z.number().int().positive(),
     title: z.string(),
+    /** One or two sentences for search results and link previews. */
+    description: z.string(),
     /** Shorter title for the index column, if the full one is long. */
     shortTitle: z.string().optional(),
     date: z.coerce.date(),
     /** Where the numbers come from, shown in the header row. */
     source: z.string(),
+    /** Link for the source, if there is one. */
+    sourceHref: z.url().optional(),
     draft: z.boolean().default(false),
     /** The whole site renders in this theme while the post is open (see src/lib/themes.ts). */
     theme: z.enum(THEME_NAMES).default(DEFAULT_THEME),

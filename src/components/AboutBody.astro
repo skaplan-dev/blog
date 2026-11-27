@@ -1,0 +1,363 @@
+---
+/* The About page: a vintage baseball card, front and back side by side.
+   The front borrows the mid-'70s layout (two-tone border, drop-shadowed word on top, rounded
+   photo frame, a baseball in the corner); none of a real set's marks. Data lives in src/lib/card.ts. */
+import { card, seasons } from '../lib/card';
+// Phosphor icons (duotone), inlined so they take the card's ink via currentColor.
+import tram from '@phosphor-icons/core/assets/duotone/tram-duotone.svg?raw';
+import baseball from '@phosphor-icons/core/assets/duotone/baseball-duotone.svg?raw';
+// Tabler's baseball: diagonal seams with stitches, reads as a ball even small.
+import baseballFront from '@tabler/icons/outline/ball-baseball.svg?raw';
+---
+
+<div class="cards">
+  <!-- The front follows a mid-'70s card: two-tone border, drop-shadowed word on top, rounded
+       photo frame, a baseball in the corner. -->
+  <section class="card front" aria-label="Card front">
+    <p class="team" aria-hidden="true">{card.team}</p>
+    <div class="frame">
+      <div class="photo">
+        {card.photo ? <img src={card.photo} alt={card.name} /> : <span class="todo">Photo</span>}
+      </div>
+    </div>
+    <h2 class="name">{card.name}</h2>
+    <div class="ball" aria-hidden="true" set:html={baseballFront} />
+  </section>
+
+  <!-- The back follows a '70s card back: vitals and a cartoon up top, a green name band,
+       the career record, a red blurb box and the printer's line. -->
+  <section class="card back" aria-label="Card back">
+    <div class="sheet">
+      <div class="top">
+        <p class="vit">
+          Bats: {card.bats} &nbsp;Throws: {card.throws}<br />
+          Fav team: {card.favTeam}<br />
+          Home: {card.home}
+        </p>
+        <div class="cartoon" aria-hidden="true">
+          <span class="icon ball-icon" set:html={baseball} />
+          <span class="icon tram-icon" set:html={tram} />
+        </div>
+        <p class="trivia">
+          Fun fact: {card.funFact ?? <span class="todo">one line about you</span>}
+        </p>
+      </div>
+
+      <div class="band">
+        <span class="num">{card.no}</span>
+        <span class="nm">{card.name} <span aria-hidden="true">•</span> {card.pos}</span>
+      </div>
+
+      <div class="record">
+        <h3>Career record</h3>
+        <table>
+          <thead>
+            <tr><th>Year</th><th>Club</th><th>Pos</th></tr>
+          </thead>
+          <tbody>
+            {
+              seasons.map((s) => (
+                <tr>
+                  <td class="yrs">{s.years}</td>
+                  <td>{s.href ? <a href={s.href}>{s.club}</a> : s.club}</td>
+                  <td>{s.pos}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2">Career totals</td><td>{seasons.length} clubs</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <p class="blurb">{card.blurb}</p>
+    </div>
+    <p class="imprint">© 2026 sethwashere.com · Prtd in U.S.A.</p>
+  </section>
+</div>
+
+<style>
+  /* Only the cards are printed in color; the rest of the site stays black and white.
+     Each face sets its own inks below. */
+  .cards {
+    --c-cream: #f7f2e4;
+    --c-ink: #1b1a17;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(16px, 2.5vw, 32px);
+    max-width: 860px;
+    align-items: start;
+  }
+  /* Everything inside a card scales with the card (cqi = 1% of its width). The card's own
+     border and corners can't use cqi (it would measure the page), so they're in px. */
+  .card {
+    container-type: inline-size;
+    aspect-ratio: 5 / 7;
+    border-radius: 9px;
+    color: var(--c-ink);
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.18),
+      0 10px 24px -10px rgb(0 0 0 / 0.35);
+  }
+
+  /* ---------- front ---------- */
+  .front {
+    --f-green: #3d9a5c;
+    --f-yellow: #ecd54c;
+    --f-red: #d3432b;
+
+    position: relative;
+    background: linear-gradient(var(--f-green) 0 58%, var(--f-yellow) 58%);
+    border: 7px solid var(--c-cream);
+    overflow: hidden;
+  }
+  .team {
+    position: absolute;
+    top: 2cqi;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 15cqi;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--f-red);
+    /* the hard black drop that '70s card lettering is printed with */
+    text-shadow: 1.3cqi 1.1cqi 0 var(--c-ink);
+  }
+  .frame {
+    position: absolute;
+    top: 21cqi;
+    left: 7cqi;
+    right: 7cqi;
+    bottom: 22cqi;
+    padding: 1.6cqi;
+    background: var(--c-cream);
+    border-radius: 3.5cqi;
+  }
+  .photo {
+    position: relative;
+    height: 100%;
+    border-radius: 2.4cqi;
+    overflow: hidden;
+    outline: 0.5cqi solid var(--c-ink);
+    display: grid;
+    place-items: center;
+    background: var(--c-cream);
+  }
+  .photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* a little printed-cardboard warmth */
+    filter: saturate(0.88) contrast(1.04) sepia(0.08);
+  }
+  .name {
+    position: absolute;
+    left: 8cqi;
+    bottom: 6cqi;
+    font-size: 8cqi;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--c-ink);
+  }
+  /* The corner baseball: Tabler's ball-baseball, seams and stitches in red on a cream disc
+     ringed in ink. Its own outline circle is hidden; the ink ring is the ball's edge. */
+  .ball {
+    position: absolute;
+    right: 3.5cqi;
+    bottom: 3cqi;
+    width: 26cqi;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #fffdf7, #efe7d4 75%, #d9cfba);
+    border: 2.6cqi solid var(--c-ink);
+    color: var(--f-red);
+    overflow: hidden;
+    filter: drop-shadow(1.2cqi 1cqi 0 var(--c-ink));
+  }
+  /* The icon's ball is 18 of its 24 units; scale it so the seams run to the ink ring. */
+  .ball :global(svg) {
+    display: block;
+    width: 133.4%;
+    height: 133.4%;
+    margin: -16.7%;
+    stroke-width: 1.2;
+  }
+  .ball :global(path:nth-of-type(2)) {
+    display: none;
+  }
+
+  /* ---------- back: green and red ink on grey-brown cardboard ---------- */
+  .back {
+    --b-board: #b5a98e;
+    --b-green: #2c7a52;
+    --b-red: #cf5446;
+    --b-salmon: #de8a78;
+    --b-ink: #1d3a2a;
+
+    background: var(--b-board);
+    border: 7px solid var(--b-board);
+    color: var(--b-ink);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Barlow Condensed', var(--font);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .back a {
+    color: inherit;
+  }
+  .sheet {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1cqi solid var(--b-green);
+    border-radius: 1.2cqi;
+    overflow: hidden;
+    font-size: 4.2cqi;
+    line-height: 1.15;
+  }
+
+  /* vitals, cartoon arch, trivia strip */
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 40cqi;
+    grid-template-rows: 1fr auto;
+    border-bottom: 1cqi solid var(--b-green);
+  }
+  .vit {
+    background: var(--b-red);
+    padding: 2.6cqi 3cqi;
+    font-size: 4.4cqi;
+    text-transform: none;
+  }
+  .trivia {
+    grid-column: 1;
+    background: var(--b-salmon);
+    border-top: 1cqi solid var(--b-green);
+    padding: 1.6cqi 3cqi;
+    text-transform: none;
+  }
+  .cartoon {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin: 2cqi 2cqi 0 0;
+    background: var(--b-salmon);
+    border: 1cqi solid var(--b-green);
+    border-bottom: 0;
+    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+    display: grid;
+    place-items: center;
+    padding: 4cqi 2cqi 1cqi;
+    position: relative;
+    color: var(--b-green);
+  }
+  .icon {
+    display: block;
+  }
+  .icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .tram-icon {
+    width: 62%;
+  }
+  /* the ball sails in over the car's shoulder */
+  .ball-icon {
+    position: absolute;
+    top: 14%;
+    left: 12%;
+    width: 24%;
+    rotate: -20deg;
+  }
+
+  /* green band with the card number and name */
+  .band {
+    display: flex;
+    align-items: center;
+    gap: 4cqi;
+    background: var(--b-green);
+    padding: 1.6cqi 3cqi;
+  }
+  .num {
+    background: var(--b-board);
+    color: var(--b-green);
+    padding: 0.4cqi 1.6cqi;
+    font-size: 6cqi;
+    line-height: 1;
+  }
+  .nm {
+    color: #efe5cc;
+    font-size: 6.6cqi;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  /* career record: green rules on the bare cardboard */
+  .record {
+    padding: 1.6cqi 3cqi 2cqi;
+  }
+  .record h3 {
+    font-size: 4.2cqi;
+    text-align: center;
+    border-bottom: 0.5cqi solid var(--b-green);
+    padding-bottom: 0.8cqi;
+    color: var(--b-green);
+  }
+  .record table {
+    font-size: 3.9cqi;
+  }
+  .record th,
+  .record td {
+    border: 0;
+    padding: 0.6cqi 1.4cqi 0.6cqi 0;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    font-size: inherit;
+    text-transform: inherit;
+  }
+  .record thead th {
+    font-weight: 700;
+    border-bottom: 0.4cqi solid var(--b-green);
+  }
+  .record tfoot td {
+    font-weight: 700;
+    border-top: 0.4cqi solid var(--b-green);
+  }
+  .yrs {
+    white-space: nowrap;
+  }
+
+  /* red blurb box */
+  .blurb {
+    flex: 1;
+    margin: 0 2cqi 2cqi;
+    background: var(--b-red);
+    border: 0.8cqi solid var(--b-green);
+    padding: 2cqi 3cqi;
+    font-family: var(--font);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 4.4cqi;
+    line-height: 1.3;
+  }
+  .imprint {
+    font-size: 2.6cqi;
+    letter-spacing: 0.12em;
+    color: var(--b-green);
+    padding: 1.2cqi 2cqi 0;
+  }
+</style>

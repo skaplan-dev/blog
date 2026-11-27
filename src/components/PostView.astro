@@ -16,7 +16,7 @@ const { Content } = await render(post);
         <td class="no">No. {String(post.data.no).padStart(2, '0')}</td>
         <td><h1 class="title">{post.data.title}</h1></td>
         <td class="num wide"><time datetime={isoDay(post.data.date)}>{formatDay(isoDay(post.data.date))}</time></td>
-        <td class="num wide">{post.data.source}</td>
+        <td class="num wide">{post.data.sourceHref ? <a href={post.data.sourceHref}>{post.data.source}</a> : post.data.source}</td>
       </tr>
     </tbody>
   </table>

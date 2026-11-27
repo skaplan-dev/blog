@@ -1,13 +1,22 @@
 ---
-/* A plain page (resume, projects, about, contact): header row, then content. */
+/* A plain page (about, contact): header row, then content. */
 import Base from './Base.astro';
 import type { PageKey } from '../lib/nav';
 
-type Props = { title: string; page: PageKey; note?: string };
-const { title, page, note } = Astro.props;
+type Props = {
+  title: string;
+  page: PageKey;
+  note?: string;
+  /** Browser-tab and link-preview title, if different from the heading. */
+  docTitle?: string;
+  description?: string;
+  /** Canonical path, if this page duplicates another (the home page is /about/). */
+  canonical?: string;
+};
+const { title, page, note, docTitle = title, description, canonical } = Astro.props;
 ---
 
-<Base title={title} current={{ kind: 'page', page }}>
+<Base title={docTitle} description={description} canonical={canonical} current={{ kind: 'page', page }}>
   <div class="box">
 <table class="page-head">
     <tbody>

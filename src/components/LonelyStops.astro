@@ -44,7 +44,7 @@ const label = (s: (typeof stops)[number]) =>
               <tr>
                 <td class="nowrap">{tied ? '=' : ''}{String(rank).padStart(2, '0')}</td>
                 <td>
-                  <b>{s.name}</b>
+                  <b><a href={`https://www.mbta.com/stops/${s.id}`}>{s.name}</a></b>
                   <span class="town">{s.town}</span>
                 </td>
                 <td>{s.routes.join(', ')}</td>
@@ -75,7 +75,7 @@ const label = (s: (typeof stops)[number]) =>
       Ranked by consecutive falls with nobody getting on or off (fewer than 0.05 a weekday, all routes combined), then by
       buses stopping on {formatDay(scheduleDate)}. "=" marks a tie. Dashed: a fall with nobody. Dot: someone. Speck: not counted.
     </span>
-    <span>Source: MBTA ridership counts and schedules</span>
+    <span>Source: <a href="https://gis.data.mass.gov/datasets/8daf4a33925a4df59183f860826d29ee">MBTA ridership counts</a> and schedules</span>
   </div>
 </figure>
 

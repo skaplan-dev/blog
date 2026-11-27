@@ -18,7 +18,6 @@
 
   /* Type roles. rem, so browser zoom and user font settings scale everything. */
   --text-title: clamp(1.75rem, 1.3rem + 1.3vw, 2.25rem); /* post and page titles */
-  --text-stat: 1.5rem; /* a big number inside a figure */
   --text-step: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem); /* headings printed over a map */
   --text-lead: 1.25rem; /* opening sentence, section headings, masthead */
   --text-body: 1rem; /* prose, table cells, nav */
@@ -477,4 +476,20 @@ li {
 .city-map .maplibregl-ctrl-bottom-right {
   top: 0;
   bottom: auto;
+}
+
+/* Condensed gothic for the About card back (self-hosted, latin only). */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-500-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-700-latin.woff2') format('woff2');
 }

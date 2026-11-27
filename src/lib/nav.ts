@@ -1,6 +1,5 @@
 export const PAGES = [
   { key: 'about', label: 'About', href: '/about/' },
-  { key: 'resume', label: 'Resume', href: '/resume/' },
   { key: 'contact', label: 'Contact', href: '/contact/' },
 ] as const;
 

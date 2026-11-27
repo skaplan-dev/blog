@@ -382,7 +382,7 @@ export default function WaitWithIt({ stop, town, route, times, yearsAtZero, endi
           <p>Imagined: the first person counted here in {yearsAtZero} years.</p>
         ) : (
           <>
-            <p>Under 0.05 people a weekday in {yearsAtZero} years of fall counts. Source: MBTA.</p>
+            <p>Under 0.05 people a weekday in {yearsAtZero} years of fall counts. Source: <a href="https://gis.data.mass.gov/datasets/8daf4a33925a4df59183f860826d29ee">MBTA</a>.</p>
             <p className="sr-only">
               The {route} stops here at {times.map((t) => clock(minutesOf(t))).join(', ')}. The MBTA hasn't counted anyone getting on or off.
             </p>
