@@ -12,7 +12,7 @@ export const getStaticPaths = (async () => {
 
 type Props = { post: Post };
 const { post } = Astro.props;
-const image = postImage(post.id, post.data.title);
+const image = postImage(post.id, post.data.title, post.data.image);
 const jsonLd = postLd(Astro.site, {
   title: post.data.title,
   description: post.data.description,

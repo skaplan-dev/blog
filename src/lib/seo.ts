@@ -18,9 +18,10 @@ export const DEFAULT_IMAGE: ShareImage = {
   alt: "Seth Kaplan's baseball card: a vintage-style front with a photo of Seth, and a back with a career record.",
 };
 
-/** Share image generated at build time for a post (see src/pages/og/posts/[id].png.ts). */
-export const postImage = (id: string, title: string): ShareImage => ({
-  src: `/og/posts/${id}.png`,
+/** A post's share image: its own `image` if it has one, else the one drawn at build time
+    (see src/pages/og/posts/[id].png.ts). */
+export const postImage = (id: string, title: string, image?: string): ShareImage => ({
+  src: image ?? `/og/posts/${id}.png`,
   width: 1200,
   height: 630,
   alt: title,

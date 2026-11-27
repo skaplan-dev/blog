@@ -4,7 +4,8 @@ import { getPosts, type Post } from '../../../lib/posts';
 import { renderPostImage } from '../../../lib/ogPost';
 
 export const getStaticPaths = (async () => {
-  const posts = await getPosts();
+  // Posts with a hand-made image don't need one drawn.
+  const posts = (await getPosts()).filter((p) => !p.data.image);
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }) satisfies GetStaticPaths;
 

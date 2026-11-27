@@ -16,6 +16,8 @@ const posts = defineCollection({
     date: z.coerce.date(),
     /** Where the numbers come from, shown in the header row. */
     source: z.string(),
+    /** A hand-made share image under public/ (1200×630). Without one, the build draws one. */
+    image: z.string().optional(),
     /** Link for the source, if there is one. */
     sourceHref: z.url().optional(),
     draft: z.boolean().default(false),
