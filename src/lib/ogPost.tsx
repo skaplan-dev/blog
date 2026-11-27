@@ -1,14 +1,12 @@
-/* A post's link-preview image (1200×630), drawn with Satori at build time in the post's theme:
-   the site's ruled header row, the title, the lede, and a footer with the source. */
+/* A post's link-preview image (1200×630), drawn with Satori at build time in the post's theme.
+   Deliberately bare: the post number and the title. Previews already print the site name,
+   domain and description under the image, so the image doesn't repeat them. */
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { CSSProperties } from 'react';
 import satori, { type Font } from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import { formatDay, isoDay } from './format';
 import { resolveTheme } from './themes';
 import type { Post } from './posts';
-import { AUTHOR, SITE_NAME } from './seo';
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -43,9 +41,7 @@ const weight = (w: string): 300 | 400 | 600 | 700 => (w === '300' ? 300 : w === 
 
 export const renderPostImage = async (post: Post): Promise<Uint8Array<ArrayBuffer>> => {
   const t = resolveTheme(post.data.theme);
-  const rule = `2px solid ${t.ruleColor}`;
   const strong = weight(t.strongWeight);
-  const cell = { padding: '14px 20px', display: 'flex', alignItems: 'center' } satisfies CSSProperties;
 
   const svg = await satori(
     <div
@@ -55,32 +51,28 @@ export const renderPostImage = async (post: Post): Promise<Uint8Array<ArrayBuffe
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'space-between',
         background: t.paper,
         color: t.ink,
         fontFamily: 'Card',
-        padding: 48,
-        gap: 28,
+        padding: 72,
       }}
     >
-      <div style={{ display: 'flex', border: rule, fontSize: 26, fontWeight: strong }}>
-        <div style={{ ...cell, borderRight: rule, gap: 14 }}>
-          <div style={{ width: 18, height: 18, background: t.accent }} />
-          No. {String(post.data.no).padStart(2, '0')}
-        </div>
-        <div style={{ ...cell, borderRight: rule, flex: 1 }}>{formatDay(isoDay(post.data.date))}</div>
-        <div style={{ ...cell }}>sethwashere.com</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 28, fontWeight: strong }}>
+        <div style={{ width: 20, height: 20, background: t.accent }} />
+        No. {String(post.data.no).padStart(2, '0')}
       </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 24, paddingTop: 8 }}>
-        <div style={{ fontSize: 92, fontWeight: weight(t.titleWeight), lineHeight: 1.02, letterSpacing: -2, textWrap: 'balance' }}>
-          {post.data.title}
-        </div>
-        <div style={{ fontSize: 30, lineHeight: 1.35, color: t.mute, maxWidth: 980 }}>{post.data.description}</div>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: rule, paddingTop: 18, fontSize: 24 }}>
-        <div style={{ fontWeight: strong }}>{SITE_NAME} · {AUTHOR}</div>
-        <div style={{ color: t.mute }}>{post.data.source}</div>
+      <div
+        style={{
+          fontSize: 112,
+          fontWeight: weight(t.titleWeight),
+          lineHeight: 1,
+          letterSpacing: -3,
+          textWrap: 'balance',
+          maxWidth: 1000,
+        }}
+      >
+        {post.data.title}
       </div>
     </div>,
     { width: WIDTH, height: HEIGHT, fonts: await loadFonts(post.data.theme) },
